@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Request;
 
 class Machine extends Model
 {
@@ -27,7 +28,7 @@ class Machine extends Model
 
     public function getQrcodeAttribute()
     {
-        return env('APP_URL').'/'.$this->id;
+        return Request::server('HTTP_HOST').'/'.$this->id;
     }
 
     // 禁用区内
