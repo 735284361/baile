@@ -28,7 +28,7 @@ class Machine extends Model
 
     public function getQrcodeAttribute()
     {
-        return Request::server('HTTP_HOST').'/'.$this->id;
+        return url("/{$this->id}");
     }
 
     // 禁用区内
