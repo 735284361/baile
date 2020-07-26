@@ -30,6 +30,7 @@ class MachineController extends AdminController
 
         $grid->column('id', __('编号'));
         $grid->column('num', __('机械编码'));
+        $grid->column('qrcode',__('二维码'))->qrcode();
         $grid->column('forbidden_area', __('禁用区内'))->using(Machine::getForbiddenStatus());
         $grid->column('standard', __('国标'))->using(Machine::getStandardStatus());
         $grid->column('name', __('机械'));
@@ -65,6 +66,8 @@ class MachineController extends AdminController
             $actions->disableView();
             $actions->disableDelete();
         });
+
+        $grid->fixColumns(4,-2);
 
         return $grid;
     }

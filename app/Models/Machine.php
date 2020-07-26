@@ -9,6 +9,8 @@ class Machine extends Model
     //
     protected $table = 'machine';
 
+    protected $appends = ['qrcode'];
+
     // 获取-商品详情轮播
     public function getPicsAttribute($value)
     {
@@ -21,6 +23,11 @@ class Machine extends Model
         if (is_array($value)) {
             $this->attributes['pics'] = json_encode($value);
         }
+    }
+
+    public function getQrcodeAttribute()
+    {
+        return env('APP_URL').'/'.$this->id;
     }
 
     // 禁用区内
