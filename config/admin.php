@@ -300,7 +300,7 @@ return [
     | This value is used to set the background image of login page.
     |
     */
-    'login_background_image' => 'https://cqyldh.oss-cn-chengdu.aliyuncs.com/images/2f3e79f2b5993ed126ff5b9c4052beca.png',
+    'login_background_image' => '',
 
     /*
     |--------------------------------------------------------------------------
