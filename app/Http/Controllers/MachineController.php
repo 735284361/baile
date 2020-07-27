@@ -12,7 +12,6 @@ class MachineController extends Controller
     public function index($id)
     {
         $data = Machine::find($id);
-        $service = $_SERVER;
         return view('index',compact('data'));
     }
 }
