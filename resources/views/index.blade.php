@@ -15,21 +15,32 @@
     <link href="{{ asset('css/weui.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/example.css') }}" rel="stylesheet" type="text/css">
 
-    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 
     <script type="text/javascript">
-        function funcReadImgInfo() {
-            var imgs = [];
-            var imgObj = $("#imgs img");//这里改成相应的对象
+        var imgs = [];
+        var imgObj;
+        window.onload=function(){
+            getImgs();
+        }
+
+        function getImgs() {
+            imgObj = $("#imgs img");//这里改成相应的对象
             for (var i = 0; i < imgObj.length; i++) {
                 imgs.push('http://baile.raohouhai.com'+imgObj.eq(i).attr('src'));
                 console.log(imgs)
+            }
+        }
+
+        function funcReadImgInfo() {
+            for (var i = 0; i < imgObj.length; i++) {
                 imgObj.eq(i).click(function () {
                     var nowImgurl = 'http://baile.raohouhai.com'+$(this).attr('src');
-                    WeixinJSBridge.invoke("imagePreview", {
-                        "urls": imgs,
-                        "current": nowImgurl
+                    wx.previewImage({
+                        current: nowImgurl, // 当前显示图片的http链接
+                        urls: imgs // 需要预览的图片http链接列表
                     });
+
                 });
             }
         }
