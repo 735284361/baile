@@ -93,8 +93,8 @@
                 </div>
                 <div class="weui_flex weui_cells_title">
                     <div class="weui_flex_item" style="text-align:center;">
-                        <div class="m_res_summary_block">禁用区内<span class="green">{{ $data['num'] }}</span></div>
-                        <div class="m_res_summary_block">国标<span class="green">合格</span></div>
+                        <div class="m_res_summary_block">禁用区内<span class="green">{{ App\Models\Machine::getForbiddenStatus($data['forbidden_area']) }}</span></div>
+                        <div class="m_res_summary_block">国标<span class="green">{{ App\Models\Machine::getStandardStatus($data['standard']) }}</span></div>
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@
 
                     <div class="weui_cell">
                         <div class="weui_cell_bd weui_cell_primary">
-                            <p>机械品牌：{{ $data['standard'] }}</p>
+                            <p>机械品牌：{{ $data['brand'] }}</p>
                         </div>
                         <div class="weui_cell_ft"></div>
                     </div>
