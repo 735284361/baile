@@ -6,35 +6,40 @@
     <meta name="robots" content="noindex,nofollow">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>非道路移动机械移动查询系统</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fancybox-1.3.4.css') }}">
+{{--    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fancybox-1.3.4.css') }}">--}}
     <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/gmap3.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/jquery.fancybox-1.3.4.pack.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/jquery.mousewheel-3.0.4.pack.js') }}"></script>
+{{--    <script type="text/javascript" src="{{ asset('js/gmap3.min.js') }}"></script>--}}
+{{--    <script type="text/javascript" src="{{ asset('js/jquery.fancybox-1.3.4.pack.js') }}"></script>--}}
+{{--    <script type="text/javascript" src="{{ asset('js/jquery.mousewheel-3.0.4.pack.js') }}"></script>--}}
+
     <link href="{{ asset('css/weui.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/example.css') }}" rel="stylesheet" type="text/css">
 
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
     <script type="text/javascript">
-        $(function(){
-            $('[rel=mainmaster]').fancybox({
-                'transitionIn'		: 'none',
-                'transitionOut'		: 'none',
-                'titlePosition' 	: 'over',
-                'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
-                    return '<span id="fancybox-title-over">机械照片 ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
-                }
-            });
-        })
+        function funcReadImgInfo() {
+            var imgs = [];
+            var imgObj = $("#imgs img");//这里改成相应的对象
+            for (var i = 0; i < imgObj.length; i++) {
+                imgs.push('http://baile.test'+imgObj.eq(i).attr('src'));
+                console.log(imgs)
+                imgObj.eq(i).click(function () {
+                    var nowImgurl = 'http://baile.test'+$(this).attr('src');
+                    WeixinJSBridge.invoke("imagePreview", {
+                        "urls": imgs,
+                        "current": nowImgurl
+                    });
+                });
+            }
+        }
     </script>
 </head>
 
 <body ontouchstart="">
 <div class="container" id="container">
     <div id="mainpage">
-
         <div class="wrap">
-
-
             <style>
                 .m_envcode_block {
                     display:block;
@@ -159,7 +164,9 @@
 
                                     <ul class="weui_uploader_files" id="uppicbox">
                                         @foreach($data['pics'] as $v)
-                                            <li class="weui_uploader_file"><a class="picbox" href="{{ Storage::url($v) }}" rel="mainmaster"><img src="{{ Storage::url($v) }}"></a></li>
+                                            <li class="weui_uploader_file" id="imgs">
+                                                <img src="{{ Storage::url($v) }}" onclick="funcReadImgInfo()">
+                                            </li>
                                         @endforeach
                                     </ul>
 
@@ -171,44 +178,6 @@
 
                 <div class="weui_cells_tips"><small>最后更新时间:2020-05-22 14:58:14</small></div>
         </div><!--end of container-->
-
-
-
-        <script>
-            function ShowToast(msg)
-            {
-                document.getElementById("toast-msg").innerHTML=msg;
-
-                $('#toast').show();
-                setTimeout(function () {
-                    $('#toast').hide();
-                }, 2000);
-            }
-
-            function ShowDlg1()
-            {
-                $('#dialog1').show().on('click', '.weui_btn_dialog', function () {
-                    $('#dialog1').off('click').hide();
-                });
-            }
-            function ShowDlg2()
-            {
-                $('#dialog2').show().on('click', '.weui_btn_dialog', function () {
-                    $('#dialog2').off('click').hide();
-                });
-            }
-
-        </script>
-
-        <!--谷歌地图js-->
-        <script type="text/javascript">
-            jQuery('#yw0').gmap3({'action':'init','options':{'center':['39.012','117.24'],'mapTypeControlOptions':{'style':google.maps.MapTypeControlStyle.DROPDOWN_MENU,'position':google.maps.ControlPosition.TOP_RIGHT},'mapTypeId':google.maps.MapTypeId.ROADMAP,'panControl':true,'panControlOptions':{'position':google.maps.ControlPosition.LEFT_TOP},'scaleControl':true,'streetViewControl':false,'zoom':14,'zoomControlOptions':{'style':google.maps.ZoomControlStyle.LARGE,'position':google.maps.ControlPosition.RIGHT_CENTER}}},{'action':'addMarker','latLng':['39.012','117.24'],'marker':{'options':{'draggable':false,'icon':'/Templates/mb/images/mapmarker.png','title':'TJ01015095252'}}});
-            jQuery(function($) {
-                $('.picbox').fancybox({'titleShow':true,'autoScale':true});
-            });
-        </script>
-
-
     </div>
 
 </div><div id="fancybox-tmp" style="padding: 50px;"></div>
