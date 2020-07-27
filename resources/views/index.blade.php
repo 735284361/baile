@@ -18,28 +18,18 @@
     <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 
     <script type="text/javascript">
-        var imgs = [];
-        var imgObj;
-        window.onload=function(){
-            getImgs();
-        }
-
-        function getImgs() {
-            imgObj = $("#imgs img");//这里改成相应的对象
+        function funcReadImgInfo(obj) {
+            var imgs = [];
+            var imgObj = $("#imgs img");//这里改成相应的对象
             for (var i = 0; i < imgObj.length; i++) {
                 imgs.push('{{$_SERVER["HTTP_HOST"]}}'+imgObj.eq(i).attr('src'));
                 console.log(imgs)
             }
-        }
 
-        function funcReadImgInfo(obj) {
-            var nowImgurl = 'http://baile.raohouhai.com'+$(obj).attr('src');
+            var nowImgurl = '{{$_SERVER["HTTP_HOST"]}}'+$(obj).attr('src');
             wx.previewImage({
                 current: nowImgurl, // 当前显示图片的http链接
-                urls: [
-                    'http://baile.raohouhai.com/storage/images/68ec3855d9d616ee2ad4be71646a8133.jpg',
-                    'http://baile.raohouhai.com/storage/images/04ed2bddf9a67ea90914f3c920682309.jpeg'
-                ] // 需要预览的图片http链接列表
+                urls: imgs // 需要预览的图片http链接列表
             });
         }
     </script>
