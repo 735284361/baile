@@ -20,7 +20,7 @@
     <script type="text/javascript">
         function funcReadImgInfo(obj) {
             var imgs = [];
-            var host = '{{$_SERVER["APP_URL"]}}';
+            var host = '{{$_SERVER["HTTP_HOST"]}}';
             var imgObj = $("#imgs img");//这里改成相应的对象
             for (var i = 0; i < imgObj.length; i++) {
                 imgs.push(host+imgObj.eq(i).attr('src'));
