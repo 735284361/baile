@@ -82,7 +82,7 @@
                     color: @globalTextColor;
                     font-size: @weuiCellTipsFontSize;
 
-                & + .weui_cells {
+                .weui_cells {
                       margin-top: 0;
                   }
             </style>
