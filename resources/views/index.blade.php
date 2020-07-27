@@ -22,10 +22,10 @@
             var imgs = [];
             var imgObj = $("#imgs img");//这里改成相应的对象
             for (var i = 0; i < imgObj.length; i++) {
-                imgs.push('http://baile.test'+imgObj.eq(i).attr('src'));
+                imgs.push('http://baile.raohouhai.com'+imgObj.eq(i).attr('src'));
                 console.log(imgs)
                 imgObj.eq(i).click(function () {
-                    var nowImgurl = 'http://baile.test'+$(this).attr('src');
+                    var nowImgurl = 'http://baile.raohouhai.com'+$(this).attr('src');
                     WeixinJSBridge.invoke("imagePreview", {
                         "urls": imgs,
                         "current": nowImgurl
