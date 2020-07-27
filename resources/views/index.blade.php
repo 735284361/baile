@@ -33,16 +33,14 @@
         }
 
         function funcReadImgInfo() {
-            for (var i = 0; i < imgObj.length; i++) {
-                imgObj.eq(i).click(function () {
-                    var nowImgurl = 'http://baile.raohouhai.com'+$(this).attr('src');
-                    wx.previewImage({
-                        current: nowImgurl, // 当前显示图片的http链接
-                        urls: imgs // 需要预览的图片http链接列表
-                    });
-
-                });
-            }
+            var nowImgurl = 'http://baile.raohouhai.com'+$(this).attr('src');
+            wx.previewImage({
+                current: 'http://baile.raohouhai.com/storage/images/68ec3855d9d616ee2ad4be71646a8133.jpg', // 当前显示图片的http链接
+                urls: [
+                    'http://baile.raohouhai.com/storage/images/68ec3855d9d616ee2ad4be71646a8133.jpg',
+                    'http://baile.raohouhai.com/storage/images/04ed2bddf9a67ea90914f3c920682309.jpeg'
+                ] // 需要预览的图片http链接列表
+            });
         }
     </script>
 </head>
