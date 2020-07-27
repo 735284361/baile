@@ -27,15 +27,15 @@
         function getImgs() {
             imgObj = $("#imgs img");//这里改成相应的对象
             for (var i = 0; i < imgObj.length; i++) {
-                imgs.push('http://baile.raohouhai.com'+imgObj.eq(i).attr('src'));
+                imgs.push('{{$_SERVER["HTTP_HOST"]}}'+imgObj.eq(i).attr('src'));
                 console.log(imgs)
             }
         }
 
-        function funcReadImgInfo() {
-            var nowImgurl = 'http://baile.raohouhai.com'+$(this).attr('src');
+        function funcReadImgInfo(obj) {
+            var nowImgurl = 'http://baile.raohouhai.com'+$(obj).attr('src');
             wx.previewImage({
-                current: 'http://baile.raohouhai.com/storage/images/68ec3855d9d616ee2ad4be71646a8133.jpg', // 当前显示图片的http链接
+                current: nowImgurl, // 当前显示图片的http链接
                 urls: [
                     'http://baile.raohouhai.com/storage/images/68ec3855d9d616ee2ad4be71646a8133.jpg',
                     'http://baile.raohouhai.com/storage/images/04ed2bddf9a67ea90914f3c920682309.jpeg'
@@ -174,7 +174,7 @@
                                     <ul class="weui_uploader_files" id="uppicbox">
                                         @foreach($data['pics'] as $v)
                                             <li class="weui_uploader_file" id="imgs">
-                                                <img src="{{ Storage::url($v) }}" onclick="funcReadImgInfo()">
+                                                <img src="{{ Storage::url($v) }}" onclick="funcReadImgInfo(this)">
                                             </li>
                                         @endforeach
                                     </ul>
