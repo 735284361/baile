@@ -20,13 +20,13 @@
     <script type="text/javascript">
         function funcReadImgInfo(obj) {
             var imgs = [];
+            var host = '{{$_SERVER["HTTP_HOST"]}}';
             var imgObj = $("#imgs img");//这里改成相应的对象
             for (var i = 0; i < imgObj.length; i++) {
-                imgs.push('{{$_SERVER["HTTP_HOST"]}}'+imgObj.eq(i).attr('src'));
+                imgs.push(host+imgObj.eq(i).attr('src'));
                 console.log(imgs)
             }
-
-            var nowImgurl = '{{$_SERVER["HTTP_HOST"]}}'+$(obj).attr('src');
+            var nowImgurl = host+$(obj).attr('src');
             wx.previewImage({
                 current: nowImgurl, // 当前显示图片的http链接
                 urls: imgs // 需要预览的图片http链接列表
