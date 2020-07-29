@@ -11,4 +11,7 @@
 |
 */
 
-Route::get('/{id}', 'MachineController@index');
+Route::get('/index/{id}', 'MachineController@index');
+Route::get('/login', function() {
+    return view('login');
+});

@@ -6,29 +6,33 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>非道路移动机械移动查询系统</title>
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fancybox-1.3.4.css') }}">
-    <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
-    <script type="text/javascript" src="http://ditu.google.cn/maps/api/js?sensor=false&key=AIzaSyBqQI4CruXIZsx4OQ9R-XqRKl4aidNqacw&language=zh_cn"></script>
-    <script type="text/javascript" src="{{ asset('js/gmap3.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/jquery.fancybox-1.3.4.pack.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/jquery.mousewheel-3.0.4.pack.js') }}"></script>
+{{--    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fancybox-1.3.4.css') }}">--}}
+{{--    <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>--}}
+{{--    <script type="text/javascript" src="http://ditu.google.cn/maps/api/js?sensor=false&key=AIzaSyBqQI4CruXIZsx4OQ9R-XqRKl4aidNqacw&language=zh_cn"></script>--}}
+{{--    <script type="text/javascript" src="{{ asset('js/gmap3.min.js') }}"></script>--}}
+{{--    <script type="text/javascript" src="{{ asset('js/jquery.fancybox-1.3.4.pack.js') }}"></script>--}}
+{{--    <script type="text/javascript" src="{{ asset('js/jquery.mousewheel-3.0.4.pack.js') }}"></script>--}}
 
     <link href="{{ asset('css/weui.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/example.css') }}" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript">
-        $(function(){
-            $('[rel=mainmaster]').fancybox({
-                'transitionIn'		: 'none',
-                'transitionOut'		: 'none',
-                'titlePosition' 	: 'over',
-                'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
-                    debugger
-                    return '<span id="fancybox-title-over">机械照片 ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
-                }
-            });
-        })
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+{{--    <script type="text/javascript">--}}
+{{--        $(function(){--}}
+{{--            $('[rel=mainmaster]').fancybox({--}}
+{{--                'transitionIn'		: 'none',--}}
+{{--                'transitionOut'		: 'none',--}}
+{{--                'titlePosition' 	: 'over',--}}
+{{--                'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {--}}
+{{--                    return '<span id="fancybox-title-over">机械照片 ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';--}}
+{{--                }--}}
+{{--            });--}}
+{{--        })--}}
+{{--    </script>--}}
 </head>
 
 <body ontouchstart="">
@@ -162,16 +166,11 @@
                                     <ul class="weui_uploader_files" id="uppicbox">
 
                                         @foreach($data['pics'] as $v)
-{{--                                            <li class="weui_uploader_file" id="imgs">--}}
-{{--                                                <img src="{{ Storage::url($v) }}" onclick="funcReadImgInfo(this)">--}}
-{{--                                            </li>--}}
-
                                             <li class="weui_uploader_file">
-                                                <a class="picbox" href="{{ $_SERVER["APP_URL"].Storage::url($v) }}" rel="mainmaster">
+                                                <a class="picbox" href="{{ $_SERVER["APP_URL"].Storage::url($v) }}" data-fancybox="gallery" rel="mainmaster">
                                                     <img src="{{ $_SERVER["APP_URL"].Storage::url($v) }}">
                                                 </a>
                                             </li>
-
                                         @endforeach
                                     </ul>
 
@@ -233,8 +232,8 @@
 
                 <div class="weui_cells weui_cells_access">
 
-                    <a class="weui_cell" href="http://www.taep.org.cn:8281/mobview.php?r=mobapp/appsite/applogin&amp;id=">
-                        <div class="weui_cell_hd"><img src="./非道路移动机械移动查询系统_files/update.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                    <a class="weui_cell" href="{{ url('login') }}">
+                        <div class="weui_cell_hd"><img src="{{ Storage::url('img/update.png') }}" alt="" style="width:20px;margin-right:5px;display:block"></div>
                         <div class="weui_cell_bd weui_cell_primary">
                             <p><strong>用户登录</strong></p>
                         </div>
@@ -305,4 +304,4 @@
 
 
 
-</div><div id="fancybox-tmp" style="padding: 50px;"></div><div id="fancybox-loading" style="display: none;"><div></div></div><div id="fancybox-overlay" style="background-color: rgb(119, 119, 119); opacity: 0.7; cursor: pointer; height: 812px; display: none;"></div><div id="fancybox-wrap" style="width: 295px; height: auto; top: 126px; left: 20px; display: none;"><div id="fancybox-outer"><div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div><div id="fancybox-content" style="border-width: 10px; width: 275px; height: 499px;"></div><a id="fancybox-close" style="display: none;"></a><a href="javascript:;" id="fancybox-left" style="display: none;"><span class="fancy-ico" id="fancybox-left-ico"></span></a><a href="javascript:;" id="fancybox-right" style="display: none;"><span class="fancy-ico" id="fancybox-right-ico"></span></a><div id="fancybox-title" class="fancybox-title-over" style="display: none; margin-left: 10px; width: 275px; bottom: 10px;"></div></div></div></body></html>
+</div>
