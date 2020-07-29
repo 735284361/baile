@@ -233,7 +233,7 @@
                 <div class="weui_cells weui_cells_access">
 
                     <a class="weui_cell" href="{{ url('login') }}">
-                        <div class="weui_cell_hd"><img src="{{ Storage::url('img/update.png') }}" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                        <div class="weui_cell_hd"><img src="{{ asset('img/update.png') }}" alt="" style="width:20px;margin-right:5px;display:block"></div>
                         <div class="weui_cell_bd weui_cell_primary">
                             <p><strong>用户登录</strong></p>
                         </div>
