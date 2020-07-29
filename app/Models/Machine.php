@@ -28,7 +28,7 @@ class Machine extends Model
 
     public function getQrcodeAttribute()
     {
-        return url("/{$this->id}");
+        return url("/index/{$this->id}");
     }
 
     // 禁用区内
