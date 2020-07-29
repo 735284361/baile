@@ -175,8 +175,16 @@
                     </div>
                 </div><!-- end of images,grid and map cells-->
 
-                <div class="weui_cells_tips"><small>最后更新时间:2020-05-22 14:58:14</small></div>
-        </div><!--end of container-->
+                <div class="weui_cells_tips"><small>最后更新时间:{{ $data['updated_at'] }}</small></div>
+                <div class="weui_cell">检测记录</div>
+                <div class="weui_cells_tips" style="text-align:right;border-top:1px solid #D9D9D9;"><small>仅显示最近5条记录</small></div>
+                <div class="weui_cell"><strong>请登陆系统后查看</strong></div>
+
+                <div class="weui_cell">出入场记录</div>
+                <div class="weui_cells_tips" style="text-align:right;border-top:1px solid #D9D9D9;"><small>仅显示最近5条记录</small></div>
+                <div class="weui_cell"><strong>请登陆系统后查看</strong></div>
+
+            </div><!--end of container-->
     </div>
 
 </div><div id="fancybox-tmp" style="padding: 50px;"></div>
