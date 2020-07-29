@@ -1,44 +1,43 @@
 
 <!-- saved from url=(0040)http://www.fdljxcx.cn/content/?629.html= -->
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <meta name="robots" content="noindex,nofollow">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>非道路移动机械移动查询系统</title>
-{{--    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fancybox-1.3.4.css') }}">--}}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fancybox-1.3.4.css') }}">
     <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
-{{--    <script type="text/javascript" src="{{ asset('js/gmap3.min.js') }}"></script>--}}
-{{--    <script type="text/javascript" src="{{ asset('js/jquery.fancybox-1.3.4.pack.js') }}"></script>--}}
-{{--    <script type="text/javascript" src="{{ asset('js/jquery.mousewheel-3.0.4.pack.js') }}"></script>--}}
+    <script type="text/javascript" src="http://ditu.google.cn/maps/api/js?sensor=false&key=AIzaSyBqQI4CruXIZsx4OQ9R-XqRKl4aidNqacw&language=zh_cn"></script>
+    <script type="text/javascript" src="{{ asset('js/gmap3.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.fancybox-1.3.4.pack.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.mousewheel-3.0.4.pack.js') }}"></script>
 
     <link href="{{ asset('css/weui.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/example.css') }}" rel="stylesheet" type="text/css">
 
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
-
     <script type="text/javascript">
-        function funcReadImgInfo(obj) {
-            var imgs = [];
-            var host = '{{$_SERVER["APP_URL"]}}';
-            var imgObj = $("#imgs img");//这里改成相应的对象
-            for (var i = 0; i < imgObj.length; i++) {
-                imgs.push(host+imgObj.eq(i).attr('src'));
-                console.log(imgs)
-            }
-            var nowImgurl = host+$(obj).attr('src');
-            wx.previewImage({
-                current: nowImgurl, // 当前显示图片的http链接
-                urls: imgs // 需要预览的图片http链接列表
+        $(function(){
+            $('[rel=mainmaster]').fancybox({
+                'transitionIn'		: 'none',
+                'transitionOut'		: 'none',
+                'titlePosition' 	: 'over',
+                'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+                    debugger
+                    return '<span id="fancybox-title-over">机械照片 ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+                }
             });
-        }
+        })
     </script>
 </head>
 
 <body ontouchstart="">
 <div class="container" id="container">
     <div id="mainpage">
+
         <div class="wrap">
+
+
             <style>
                 .m_envcode_block {
                     display:block;
@@ -86,7 +85,7 @@
                     color: @globalTextColor;
                     font-size: @weuiCellTipsFontSize;
 
-                .weui_cells {
+                & + .weui_cells {
                       margin-top: 0;
                   }
             </style>
@@ -160,12 +159,19 @@
                                     <div class="weui_cell_ft">{{count($data['pics'])}}张</div>
                                 </div>
                                 <div class="weui_uploader_bd">
-
                                     <ul class="weui_uploader_files" id="uppicbox">
+
                                         @foreach($data['pics'] as $v)
-                                            <li class="weui_uploader_file" id="imgs">
-                                                <img src="{{ Storage::url($v) }}" onclick="funcReadImgInfo(this)">
+{{--                                            <li class="weui_uploader_file" id="imgs">--}}
+{{--                                                <img src="{{ Storage::url($v) }}" onclick="funcReadImgInfo(this)">--}}
+{{--                                            </li>--}}
+
+                                            <li class="weui_uploader_file">
+                                                <a class="picbox" href="{{ $_SERVER["APP_URL"].Storage::url($v) }}" rel="mainmaster">
+                                                    <img src="{{ $_SERVER["APP_URL"].Storage::url($v) }}">
+                                                </a>
                                             </li>
+
                                         @endforeach
                                     </ul>
 
@@ -173,9 +179,47 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="weui_cell" style="display:none;">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>机械日常停放位置：</p>
+                            <p>
+                            </p><div id="mymap-box" style="marging:8px;height:320px;"><div id="yw0" class="gmap3" style="width:100%;height:100%"></div></div>                    <p></p>
+                        </div>
+                    </div>
+
+
+
+                    <div class="weui_cell" style="display:none;">
+                        <div class="weui_cell_bd weui_cell_primary">
+
+
+                <span>
+                        是否位于禁用区：
+                </span>
+                            <div id="gridinfobox">
+                            </div>
+
+                        </div>
+                        <div class="weui_cell_ft"></div>
+                    </div>
+
+
+                    <script type="text/JavaScript">
+                        $(document).ready(function() {
+                            jQuery.ajax({'url':'/mobview.php?r=moapp/site/ajaxGridInfo&GeoParams=eyJ4IjoiMTE3LjI0IiwieSI6IjM5LjAxMiJ9','cache':false,'success':function(html){jQuery("#gridinfobox").html(html)}});                    }
+                        );
+
+                    </script>
+
+
                 </div><!-- end of images,grid and map cells-->
 
-                <div class="weui_cells_tips"><small>最后更新时间:{{ $data['updated_at'] }}</small></div>
+                <div class="weui_cells_tips"><small>最后更新时间:2020-05-22 14:58:14</small></div>
+
+
+
                 <div class="weui_cell">检测记录</div>
                 <div class="weui_cells_tips" style="text-align:right;border-top:1px solid #D9D9D9;"><small>仅显示最近5条记录</small></div>
                 <div class="weui_cell"><strong>请登陆系统后查看</strong></div>
@@ -184,33 +228,81 @@
                 <div class="weui_cells_tips" style="text-align:right;border-top:1px solid #D9D9D9;"><small>仅显示最近5条记录</small></div>
                 <div class="weui_cell"><strong>请登陆系统后查看</strong></div>
 
-            </div><!--end of container-->
+
+                <div class="weui_cells_title">操作选项</div>
+
+                <div class="weui_cells weui_cells_access">
+
+                    <a class="weui_cell" href="http://www.taep.org.cn:8281/mobview.php?r=mobapp/appsite/applogin&amp;id=">
+                        <div class="weui_cell_hd"><img src="./非道路移动机械移动查询系统_files/update.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p><strong>用户登录</strong></p>
+                        </div>
+                        <div class="weui_cell_ft">系统已注册用户登录入口</div>
+                    </a>
+
+
+                    <div id="picbox" style="display:none;">
+
+                    </div>
+
+
+
+
+                    <div class="button">
+                        <div class="button_sp_area">
+                        </div>
+                    </div>
+
+
+                </div><!--end of content main-->
+
+
+            </div>
+
+        </div><!--end of container-->
+
+
+
+
+
+        <script>
+            function ShowToast(msg)
+            {
+                document.getElementById("toast-msg").innerHTML=msg;
+
+                $('#toast').show();
+                setTimeout(function () {
+                    $('#toast').hide();
+                }, 2000);
+            }
+
+            function ShowDlg1()
+            {
+                $('#dialog1').show().on('click', '.weui_btn_dialog', function () {
+                    $('#dialog1').off('click').hide();
+                });
+            }
+            function ShowDlg2()
+            {
+                $('#dialog2').show().on('click', '.weui_btn_dialog', function () {
+                    $('#dialog2').off('click').hide();
+                });
+            }
+
+        </script>
+
+        <!--谷歌地图js-->
+        <script type="text/javascript">
+            jQuery('#yw0').gmap3({'action':'init','options':{'center':['39.012','117.24'],'mapTypeControlOptions':{'style':google.maps.MapTypeControlStyle.DROPDOWN_MENU,'position':google.maps.ControlPosition.TOP_RIGHT},'mapTypeId':google.maps.MapTypeId.ROADMAP,'panControl':true,'panControlOptions':{'position':google.maps.ControlPosition.LEFT_TOP},'scaleControl':true,'streetViewControl':false,'zoom':14,'zoomControlOptions':{'style':google.maps.ZoomControlStyle.LARGE,'position':google.maps.ControlPosition.RIGHT_CENTER}}},{'action':'addMarker','latLng':['39.012','117.24'],'marker':{'options':{'draggable':false,'icon':'/Templates/mb/images/mapmarker.png','title':'TJ01015095252'}}});
+            jQuery(function($) {
+                $('.picbox').fancybox({'titleShow':true,'autoScale':true});
+            });
+        </script>
+
+
     </div>
 
-</div><div id="fancybox-tmp" style="padding: 50px;"></div>
-<div id="fancybox-loading" style="display: none;">
-    <div></div></div>
-<div id="fancybox-overlay" style="background-color: rgb(119, 119, 119); opacity: 0.7; cursor: pointer; height: 812px; display: none;"></div>
-<div id="fancybox-wrap" style="width: 295px; height: auto; top: 126px; left: 20px; display: none;">
-    <div id="fancybox-outer">
-        <div class="fancybox-bg" id="fancybox-bg-n"></div>
-        <div class="fancybox-bg" id="fancybox-bg-ne"></div>
-        <div class="fancybox-bg" id="fancybox-bg-e"></div>
-        <div class="fancybox-bg" id="fancybox-bg-se"></div>
-        <div class="fancybox-bg" id="fancybox-bg-s"></div>
-        <div class="fancybox-bg" id="fancybox-bg-sw"></div>
-        <div class="fancybox-bg" id="fancybox-bg-w"></div>
-        <div class="fancybox-bg" id="fancybox-bg-nw"></div>
-        <div id="fancybox-content" style="border-width: 10px; width: 275px; height: 499px;"></div>
-        <a id="fancybox-close" style="display: none;"></a>
-        <a href="javascript:;" id="fancybox-left" style="display: none;">
-            <span class="fancy-ico" id="fancybox-left-ico"></span>
-        </a>
-        <a href="javascript:;" id="fancybox-right" style="display: none;">
-            <span class="fancy-ico" id="fancybox-right-ico"></span>
-        </a>
-        <div id="fancybox-title" class="fancybox-title-over" style="display: none; margin-left: 10px; width: 275px; bottom: 10px;"></div>
-    </div>
-</div>
-</body>
-</html>
+
+
+</div><div id="fancybox-tmp" style="padding: 50px;"></div><div id="fancybox-loading" style="display: none;"><div></div></div><div id="fancybox-overlay" style="background-color: rgb(119, 119, 119); opacity: 0.7; cursor: pointer; height: 812px; display: none;"></div><div id="fancybox-wrap" style="width: 295px; height: auto; top: 126px; left: 20px; display: none;"><div id="fancybox-outer"><div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div><div id="fancybox-content" style="border-width: 10px; width: 275px; height: 499px;"></div><a id="fancybox-close" style="display: none;"></a><a href="javascript:;" id="fancybox-left" style="display: none;"><span class="fancy-ico" id="fancybox-left-ico"></span></a><a href="javascript:;" id="fancybox-right" style="display: none;"><span class="fancy-ico" id="fancybox-right-ico"></span></a><div id="fancybox-title" class="fancybox-title-over" style="display: none; margin-left: 10px; width: 275px; bottom: 10px;"></div></div></div></body></html>
