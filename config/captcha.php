@@ -49,14 +49,12 @@ return [
         'length'    => 6,
         'width'     => 120,
         'height'    => 50,
-        'quality'   => 10,
-//        'sensitive' => false,
-//        'angle'     => 0,
-//        'sharpen'   => 0,
-//        'blur'      => 0,
-//        'invert'    => false,
+        'blur'      => 0,
         'bgColor' => '#fff',
         'fontColors' => ['#1340c5'],
         'contrast'  => 100,
+        'sensitive' => false,
+        'bgImage' => false,
+        'lines' => -1,
     ]
 ];
