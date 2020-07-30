@@ -68,6 +68,7 @@ class MachineController extends AdminController
         });
 
         $grid->fixColumns(4,-2);
+        $grid->disableExport();
 
         return $grid;
     }
