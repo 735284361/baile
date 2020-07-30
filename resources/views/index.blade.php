@@ -135,14 +135,14 @@
                         <div class="weui_cell_bd weui_cell_primary">
                             <p>信息状态：审核通过</p>
                         </div>
-                        <div class="weui_cell_ft"><i class="weui_icon_waiting"></i>首次申报时间:{{ $data['first_apply_at'] }}</div>
+                        <div class="weui_cell_ft"><i class="weui_icon_waiting"></i>首次申报时间:{{ date('y-m-d H:i',strtotime($data->first_apply_at)) }}</div>
                     </div>
 
                     <div class="weui_cell">
                         <div class="weui_cell_bd weui_cell_primary">
                             <p>{{ $data['test_results'] }}</p>
                         </div>
-                        <div class="weui_cell_ft">{{ $data['test_at'] }}</div>
+                        <div class="weui_cell_ft">{{ date('y-m-d H:i',strtotime($data->test_at)) }}</div>
                     </div>
                 </div>
 
