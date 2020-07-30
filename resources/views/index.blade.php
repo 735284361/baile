@@ -6,33 +6,27 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>非道路移动机械移动查询系统</title>
 
-{{--    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fancybox-1.3.4.css') }}">--}}
-{{--    <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>--}}
-{{--    <script type="text/javascript" src="http://ditu.google.cn/maps/api/js?sensor=false&key=AIzaSyBqQI4CruXIZsx4OQ9R-XqRKl4aidNqacw&language=zh_cn"></script>--}}
-{{--    <script type="text/javascript" src="{{ asset('js/gmap3.min.js') }}"></script>--}}
-{{--    <script type="text/javascript" src="{{ asset('js/jquery.fancybox-1.3.4.pack.js') }}"></script>--}}
-{{--    <script type="text/javascript" src="{{ asset('js/jquery.mousewheel-3.0.4.pack.js') }}"></script>--}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('fancybox/jquery.fancybox-1.3.4.css') }}">
+    <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/gmap3.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('fancybox/jquery.fancybox-1.3.4.pack.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('fancybox/jquery.mousewheel-3.0.4.pack.js') }}"></script>
 
     <link href="{{ asset('css/weui.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/example.css') }}" rel="stylesheet" type="text/css">
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-
-{{--    <script type="text/javascript">--}}
-{{--        $(function(){--}}
-{{--            $('[rel=mainmaster]').fancybox({--}}
-{{--                'transitionIn'		: 'none',--}}
-{{--                'transitionOut'		: 'none',--}}
-{{--                'titlePosition' 	: 'over',--}}
-{{--                'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {--}}
-{{--                    return '<span id="fancybox-title-over">机械照片 ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';--}}
-{{--                }--}}
-{{--            });--}}
-{{--        })--}}
-{{--    </script>--}}
+    <script type="text/javascript">
+        $(function(){
+            $('[rel=mainmaster]').fancybox({
+                'transitionIn'		: 'none',
+                'transitionOut'		: 'none',
+                'titlePosition' 	: 'over',
+                'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+                    return '<span id="fancybox-title-over">机械照片 ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+                }
+            });
+        })
+    </script>
 </head>
 
 <body ontouchstart="">
@@ -167,7 +161,7 @@
 
                                         @foreach($data['pics'] as $v)
                                             <li class="weui_uploader_file">
-                                                <a class="picbox" href="{{ $_SERVER["APP_URL"].Storage::url($v) }}" data-fancybox="gallery" rel="mainmaster">
+                                                <a class="picbox" href="{{ $_SERVER["APP_URL"].Storage::url($v) }}" rel="mainmaster">
                                                     <img src="{{ $_SERVER["APP_URL"].Storage::url($v) }}">
                                                 </a>
                                             </li>
