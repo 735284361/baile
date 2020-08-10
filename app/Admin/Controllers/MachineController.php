@@ -150,10 +150,10 @@ class MachineController extends AdminController
             ->insert($watermark,'center')
             ->blur()
             ->widen(560)
-            ->text($text,40,60,function($font) {
+            ->text($text,40,100,function($font) {
                 $fontFile = public_path('img/wr.ttf');
                 $font->file($fontFile);
-                $font->size(34);
+                $font->size(30);
                 $font->color('#efe6e6');
             })
             ->required();
