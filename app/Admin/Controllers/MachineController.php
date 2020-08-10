@@ -112,7 +112,12 @@ class MachineController extends AdminController
     {
         $form = new Form(new Machine());
 
-        $watermark = base_path().'/storage/app/public/img/logo.png';
+        $watermark = public_path('img/shuiyin.png');
+
+        $para = request()->route()->parameters;
+        $id = $para['machine'];
+        $data = Machine::find($id);
+        $text = $data->model;
 
         $form->text('num', __('机械编码'))->required();
         $form->select('forbidden_area', __('禁用区内'))
@@ -142,8 +147,18 @@ class MachineController extends AdminController
             ->removable()
             ->sortable()
             ->uniqueName()
-//            ->insert($watermark,'center')
+            ->insert($watermark,'center')
+            ->blur()
+            ->widen(560)
+            ->text($text,40,60,function($font) {
+                $fontFile = public_path('img/wr.ttf');
+                $font->file($fontFile);
+                $font->size(24);
+                $font->color('#efe6e6');
+            })
             ->required();
+
+
         return $form;
     }
 }
