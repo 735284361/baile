@@ -114,7 +114,7 @@ class MachineController extends AdminController
     {
         $form = new Form(new Machine());
 
-        
+
         $form->text('num', __('机械编码'))->required();
         $form->select('forbidden_area', __('禁用区内'))
             ->default(Machine::FORBIDDEN_AREA_DISABLE)

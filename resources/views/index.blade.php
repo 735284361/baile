@@ -209,21 +209,53 @@
 
                 </div><!-- end of images,grid and map cells-->
 
-                <div class="weui_cells_tips"><small>最后更新时间:2020-05-22 14:58:14</small></div>
+                <div class="weui_cells_tips"><small>最后更新时间:{{ $data->updated_at }}</small></div>
+
+            </div><!--end of first db-->
+
+            <div class="bd">
+                <div class="weui_cells">
+                    <div class="weui_cell">
+                    </div>
+                </div>
+            </div><!--empty block-->
 
 
 
-                <div class="weui_cell">检测记录</div>
-                <div class="weui_cells_tips" style="text-align:right;border-top:1px solid #D9D9D9;"><small>仅显示最近5条记录</small></div>
-                <div class="weui_cell"><strong>请登陆系统后查看</strong></div>
+            <div class="bd">
+                <div class="weui_cells_title">检测记录</div>
+                <div class="weui_cells">
+                    <div class="weui_cell_ft">
+                        <small>仅显示最近5条记录</small>
+                    </div>
+                    <div id="TestsList" class="weui_cell">请登录系统后查看</div>
+                </div>
 
-                <div class="weui_cell">出入场记录</div>
-                <div class="weui_cells_tips" style="text-align:right;border-top:1px solid #D9D9D9;"><small>仅显示最近5条记录</small></div>
-                <div class="weui_cell"><strong>请登陆系统后查看</strong></div>
+            </div>
+
+            <div class="bd">
+                <div class="weui_cells">
+                    <div class="weui_cell">
+                    </div>
+                </div>
+            </div>
 
 
+
+            <div class="bd">
+                <div class="weui_cells_title">出入场记录</div>
+                <div class="weui_cells">
+                    <div class="weui_cell_ft">
+                        <small>仅显示最近5条记录</small>
+                    </div>
+                    <div id="CheckinList" class="weui_cell">请登录系统后查看</div>
+                </div>
+            </div>
+
+
+
+            <div class="bd">
                 <div class="weui_cells_title">操作选项</div>
-
                 <div class="weui_cells weui_cells_access">
 
                     <a class="weui_cell" href="{{ url('login') }}">
@@ -239,24 +271,14 @@
 
                     </div>
 
+                    <!--<div class="weui_btn_area">
+                    <a class="weui_btn weui_btn_primary" href="/mobview.php?r=mobapp/appsite/home" id="showTooltips">返回服务组首页</a>
+                </div>-->
 
 
 
-                    <div class="button">
-                        <div class="button_sp_area">
-                        </div>
-                    </div>
-
-
-                </div><!--end of content main-->
-
-
-            </div>
-
-        </div><!--end of container-->
-
-
-
+                </div>
+            </div><!--end of last bd-->
 
 
         <script>
