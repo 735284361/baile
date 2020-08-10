@@ -115,9 +115,12 @@ class MachineController extends AdminController
         $watermark = public_path('img/shuiyin.png');
 
         $para = request()->route()->parameters;
-        $id = $para['machine'];
-        $data = Machine::find($id);
-        $text = $data->product_no;
+        $text = '';
+        if (!empty($para)) {
+            $id = $para['machine'];
+            $data = Machine::find($id);
+            $text = $data->product_no;
+        }
 
         $form->text('num', __('机械编码'))->required();
         $form->select('forbidden_area', __('禁用区内'))
