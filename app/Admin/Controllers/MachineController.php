@@ -157,7 +157,7 @@ class MachineController extends AdminController
                 $font->color('#efe6e6');
             })
             ->required();
-        
+
 
         return $form;
     }
