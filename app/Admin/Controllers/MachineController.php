@@ -17,6 +17,8 @@ class MachineController extends AdminController
      */
     protected $title = '机械';
 
+    protected $text = '';
+
     /**
      * Make a grid builder.
      *
@@ -112,16 +114,7 @@ class MachineController extends AdminController
     {
         $form = new Form(new Machine());
 
-        $watermark = public_path('img/shuiyin.png');
-
-        $para = request()->route()->parameters;
-        $text = '';
-        if (!empty($para)) {
-            $id = $para['machine'];
-            $data = Machine::find($id);
-            $text = $data->product_no;
-        }
-
+        
         $form->text('num', __('机械编码'))->required();
         $form->select('forbidden_area', __('禁用区内'))
             ->default(Machine::FORBIDDEN_AREA_DISABLE)
@@ -145,12 +138,14 @@ class MachineController extends AdminController
         $form->textarea('test_results', __('审核结果'))->required();
         $form->datetime('test_at', __('审核时间'))
             ->default(date('Y-m-d H:i:s'));
+
+        $text = request('product_no');
         $form->multipleImage('pics',__('机械图片'))
-            ->help('请上传多张图片，上传时按住ctrl键选择多张图片')
+            ->help('按住ctrl键可选择多张图片上传')
             ->removable()
             ->sortable()
             ->uniqueName()
-            ->insert($watermark,'center')
+            ->insert(public_path('img/shuiyin.png'),'center')
             ->blur()
             ->widen(560)
             ->text($text,40,100,function($font) {
@@ -158,8 +153,7 @@ class MachineController extends AdminController
                 $font->file($fontFile);
                 $font->size(30);
                 $font->color('#efe6e6');
-            })
-            ->required();
+            });
 
         return $form;
     }
