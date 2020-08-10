@@ -158,6 +158,7 @@ class MachineController extends AdminController
             })
             ->required();
         
+
         return $form;
     }
 }
