@@ -117,7 +117,7 @@ class MachineController extends AdminController
         $para = request()->route()->parameters;
         $id = $para['machine'];
         $data = Machine::find($id);
-        $text = $data->model;
+        $text = $data->product_no;
 
         $form->text('num', __('机械编码'))->required();
         $form->select('forbidden_area', __('禁用区内'))
@@ -157,7 +157,7 @@ class MachineController extends AdminController
                 $font->color('#efe6e6');
             })
             ->required();
-        
+
         return $form;
     }
 }
