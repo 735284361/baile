@@ -153,7 +153,7 @@ class MachineController extends AdminController
             ->text($text,40,60,function($font) {
                 $fontFile = public_path('img/wr.ttf');
                 $font->file($fontFile);
-                $font->size(24);
+                $font->size(34);
                 $font->color('#efe6e6');
             })
             ->required();
