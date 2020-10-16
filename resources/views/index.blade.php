@@ -97,6 +97,7 @@
                         <div class="m_res_summary_block">禁用区内<span class="green">{{ App\Models\Machine::getForbiddenStatus($data['forbidden_area']) }}</span></div>
                         <div class="m_res_summary_block">国标<span class="green">{{ App\Models\Machine::getStandardStatus($data['standard']) }}</span></div>
                     </div>
+                    
                     <div class="weui_flex_item" style="text-align:center;">
                         <div><p class="ui-tiptext" style="color:red;font-size:110%;">{{ $data['notice'] }}</p></div>
                     </div>
