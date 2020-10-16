@@ -136,7 +136,7 @@ class MachineController extends AdminController
         $form->datetime('first_apply_at', __('首次申报时间'))
             ->default(date('Y-m-d H:i:s'));
         $form->textarea('test_results', __('审核结果'))->required();
-        $form->textarea('notice', __('注意事项'))->required();
+        $form->textarea('notice', __('注意事项'));
         $form->datetime('test_at', __('审核时间'))
             ->default(date('Y-m-d H:i:s'));
 
